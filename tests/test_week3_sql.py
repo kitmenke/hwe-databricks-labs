@@ -20,9 +20,10 @@ _W3_LAB = os.path.join(_REPO_ROOT, "labs", "week3", "week3_lab.ipynb")
 
 def test_valid_email_filter(spark):
     """Verify that the count of employees with valid emails is correct."""
-    _run_cell(spark, "valid_email_filter")
-    rows = spark.sql("SELECT * FROM week3_testing.employees WHERE email LIKE '%@%'").collect()
+    rows = _run_cell(spark, "valid_email_filter").collect()
+    # rows = spark.sql("SELECT * FROM week3_testing.employees WHERE email LIKE '%@%'").collect()
     # TODO: assert len(rows) equals the number of employees with a valid email
+    assert rows[0][0] == 3
 
 
 def test_employees_in_salary_range(spark):
